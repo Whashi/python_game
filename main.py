@@ -23,12 +23,6 @@ screen.onkey(snake.down, "Down")
 on = True
 screen.update()
 
-def game_over():
-    turtle.hideturtle()
-    turtle.color("white")
-    turtle.write("Game Over", align="center", font=("Arial", 36, "bold"))
-    return False
-
 while on:
     screen.update()
     time.sleep(0.12)
@@ -38,7 +32,8 @@ while on:
         seg_cor = (round(snake.segments[segment].xcor()), round(snake.segments[segment].ycor()))
         head_cor = (round(snake.head.xcor()), round(snake.head.ycor()))
         if seg_cor == head_cor:
-            on = game_over()
+            score_board.reset()
+            snake.reset()
 
     if snake.head.distance(food) < 15:
         score_board.add_point()
@@ -46,6 +41,7 @@ while on:
         food.refresh()
 
     if abs(snake.head.xcor()) > 290 or abs(snake.head.ycor()) > 290:
-        on = game_over()
+        score_board.reset()
+        snake.reset()
 
 screen.exitonclick()
